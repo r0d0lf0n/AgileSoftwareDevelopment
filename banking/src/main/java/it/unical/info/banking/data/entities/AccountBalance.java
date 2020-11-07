@@ -14,6 +14,7 @@ public class AccountBalance {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Basic(optional = false)
     @Column(name = "amount")
     private Long amount;
 

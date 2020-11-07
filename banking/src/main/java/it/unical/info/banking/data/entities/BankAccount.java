@@ -29,6 +29,7 @@ public class BankAccount {
             cascade = CascadeType.REMOVE)
     private List<AccountBalance> movement;
 
+    @Basic(optional = false)
     @Column(name = "accountType", length = 128)
     private String  accountType;
 

@@ -8,18 +8,21 @@ import java.util.Objects;
 @Table(name = "Movement")
 public class Movement {
 
+    protected Movement() {}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "accountNumber", referencedColumnName = "id")
-    private Contract accountNumber;
+    private BankAccount accountNumber;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date")
     private Date date;
 
+    @Basic(optional = false)
     @Column(name = "sequentialNumber")
     private Date sequentialNumber;
 
@@ -27,9 +30,11 @@ public class Movement {
     @JoinColumn(name = "contract", referencedColumnName = "id")
     private Contract contract;
 
+    @Basic(optional = false)
     @Column(name = "movementType")
     private String movementType;
 
+    @Basic(optional = false)
     @Column(name = "quantity")
     private Long quantity;
 
@@ -41,11 +46,11 @@ public class Movement {
         this.id = id;
     }
 
-    public Contract getAccountNumber() {
+    public BankAccount getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Contract accountNumber) {
+    public void setAccountNumber(BankAccount accountNumber) {
         this.accountNumber = accountNumber;
     }
 
