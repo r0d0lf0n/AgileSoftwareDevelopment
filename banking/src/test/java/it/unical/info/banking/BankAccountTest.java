@@ -22,7 +22,7 @@ public class BankAccountTest {
     public void findAll() {
         List<BankAccount> l = bankAccountDao.findAll();
 
-        Assert.assertEquals(1, l.size());
+        Assert.assertEquals(0, l.size());
     }
 
 }
