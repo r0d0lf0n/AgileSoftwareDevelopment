@@ -1,6 +1,7 @@
 package it.unical.info.banking;
 
-import it.unical.info.banking.data.dao.BankAccountDao;
+import it.unical.info.banking.data.dao.BankAccountRepository;
+import it.unical.info.banking.data.dao.BankAccountRepository;
 import it.unical.info.banking.data.entities.BankAccount;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import java.util.List;
 public class BankAccountTest {
 
     @Autowired
-    BankAccountDao bankAccountDao;
+    BankAccountRepository bankAccountDao;
 
     @Test
     public void findAll() {
