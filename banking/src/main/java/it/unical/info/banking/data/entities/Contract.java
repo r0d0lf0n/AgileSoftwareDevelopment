@@ -1,5 +1,7 @@
 package it.unical.info.banking.data.entities;
 
+import org.springframework.data.repository.cdi.Eager;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "Contract")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "rate")
 public class Contract {
 
     protected Contract() {}
@@ -18,21 +22,23 @@ public class Contract {
     @Column(name = "ISIN_code")
     private Long ISIN_code;
 
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
     @Column(name = "Description", length = 200)
     private String description;
 
+    @Basic(optional = false)
     @Column(name = "issuer", length = 100)
     private String issuer;
 
+    @Basic(optional = false)
     @Temporal(TemporalType.DATE)
     @Column(name = "date")
     private Date expirationDate;
 
+    @Basic(optional = false)
     @Column(name = "nominalValue")
     private Long nominalValue;
-
-    @Column(name = "rate")
-    private Long rate;
 
     @Column(name = "balances", nullable = false)
     @OneToMany(mappedBy = "contract",
@@ -44,7 +50,13 @@ public class Contract {
     @OneToMany(mappedBy = "contract",
             fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE)
-    private List<AccountBalance> movement;
+    private List<Movement> movement;
+
+    @Column(name = "coupon", nullable = false)
+    @OneToMany(mappedBy = "contract",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE)
+    private List<Coupon> coupon;
 
     public Long getId() {
         return id;
@@ -94,14 +106,6 @@ public class Contract {
         this.nominalValue = nominalValue;
     }
 
-    public Long getRate() {
-        return rate;
-    }
-
-    public void setRate(Long rate) {
-        this.rate = rate;
-    }
-
     public List<AccountBalance> getBalances() {
         return balances;
     }
@@ -121,13 +125,12 @@ public class Contract {
                 Objects.equals(issuer, contract.issuer) &&
                 Objects.equals(expirationDate, contract.expirationDate) &&
                 Objects.equals(nominalValue, contract.nominalValue) &&
-                Objects.equals(rate, contract.rate) &&
                 Objects.equals(balances, contract.balances);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ISIN_code, description, issuer, expirationDate, nominalValue, rate, balances);
+        return Objects.hash(id, ISIN_code, description, issuer, expirationDate, nominalValue, balances);
     }
 
     @Override
@@ -139,7 +142,6 @@ public class Contract {
                 ", issuer='" + issuer + '\'' +
                 ", expirationDate=" + expirationDate +
                 ", nominalValue=" + nominalValue +
-                ", rate=" + rate +
                 ", balances=" + balances +
                 '}';
     }
