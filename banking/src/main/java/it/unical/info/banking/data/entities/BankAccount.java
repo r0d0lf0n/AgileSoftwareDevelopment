@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "BankAccount")
 public class BankAccount {
 
-    protected BankAccount() {}
+    //protected BankAccount() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +31,7 @@ public class BankAccount {
 
     @Basic(optional = false)
     @Column(name = "accountType", length = 128)
-    private String  accountType;
+    private String accountType;
 
     public Long getId() {
         return id;
