@@ -17,11 +17,11 @@ public class AccountBalance {
     @Column(name = "amount")
     private Long amount;
 
-    @ManyToOne(fetch = FetchType.EAGER,
-            optional = false)
-    @JoinColumn(name = "accountNumber")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "accountNumber", referencedColumnName = "id")
     private BankAccount accountNumber;
 
-
-    private Long contract;
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "contract", referencedColumnName = "id")
+    private Contract contract;
 }

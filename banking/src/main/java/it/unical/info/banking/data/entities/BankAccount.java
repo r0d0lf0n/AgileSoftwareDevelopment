@@ -18,10 +18,10 @@ public class BankAccount {
     private Long id;
 
     @Column(name = "accountNumber", nullable = false)
-    @OneToMany(mappedBy = "accNumber",
+    @OneToMany(mappedBy = "accountNumber",
             fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE)
-    private List<AccountBalance> accountNumber;
+    private List<AccountBalance> balances;
 
     @Column(name = "accountType", length = 128)
     private String  accountType;
@@ -35,11 +35,11 @@ public class BankAccount {
     }
 
     public List<AccountBalance> getAccountNumber() {
-        return accountNumber;
+        return balances;
     }
 
     public void setAccountNumber(List<AccountBalance> accountNumber) {
-        this.accountNumber = accountNumber;
+        this.balances = accountNumber;
     }
 
     public String getAccountType() {
@@ -56,20 +56,20 @@ public class BankAccount {
         if (o == null || getClass() != o.getClass()) return false;
         BankAccount that = (BankAccount) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(accountNumber, that.accountNumber) &&
+                Objects.equals(balances, that.balances) &&
                 Objects.equals(accountType, that.accountType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, accountNumber, accountType);
+        return Objects.hash(id, balances, accountType);
     }
 
     @Override
     public String toString() {
         return "BankAccount{" +
                 "id=" + id +
-                ", accountNumber=" + accountNumber +
+                ", accountNumber=" + balances +
                 ", accountType='" + accountType + '\'' +
                 '}';
     }
