@@ -1,6 +1,10 @@
 package it.unical.info.banking.data.entities;
 
+import org.springframework.context.annotation.Primary;
+
 import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -13,11 +17,11 @@ public class BankAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "accountNumber")
-    @OneToMany(mappedBy = "accountNumber",
+    @Column(name = "accountNumber", nullable = false)
+    @OneToMany(mappedBy = "accNumber",
             fetch = FetchType.LAZY,
             cascade = CascadeType.REMOVE)
-    private Set<AccountBalance> accountNumber;
+    private List<AccountBalance> accountNumber;
 
     @Column(name = "accountType", length = 128)
     private String  accountType;
@@ -30,11 +34,11 @@ public class BankAccount {
         this.id = id;
     }
 
-    public Set<AccountBalance>  getAccountNumber() {
+    public List<AccountBalance> getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(Set<AccountBalance> accountNumber) {
+    public void setAccountNumber(List<AccountBalance> accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -47,10 +51,25 @@ public class BankAccount {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BankAccount that = (BankAccount) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(accountNumber, that.accountNumber) &&
+                Objects.equals(accountType, that.accountType);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, accountNumber, accountType);
+    }
+
+    @Override
     public String toString() {
         return "BankAccount{" +
                 "id=" + id +
-                ", accountNumber='" + accountNumber + '\'' +
+                ", accountNumber=" + accountNumber +
                 ", accountType='" + accountType + '\'' +
                 '}';
     }
