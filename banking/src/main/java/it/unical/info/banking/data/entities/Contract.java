@@ -40,6 +40,12 @@ public class Contract {
             cascade = CascadeType.REMOVE)
     private List<AccountBalance> balances;
 
+    @Column(name = "movement", nullable = false)
+    @OneToMany(mappedBy = "contract",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.REMOVE)
+    private List<AccountBalance> movement;
+
     public Long getId() {
         return id;
     }
