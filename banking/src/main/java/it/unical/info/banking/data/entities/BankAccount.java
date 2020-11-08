@@ -1,5 +1,6 @@
 package it.unical.info.banking.data.entities;
 
+import it.unical.info.banking.data.helpers.AccountType;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
@@ -30,8 +31,8 @@ public class BankAccount {
     private List<AccountBalance> movement;
 
     @Basic(optional = false)
-    @Column(name = "accountType", length = 128)
-    private String accountType;
+    @Column(name = "accountType")
+    private AccountType accountType;
 
     public Long getId() {
         return id;
@@ -49,11 +50,11 @@ public class BankAccount {
         this.balance = accountNumber;
     }
 
-    public String getAccountType() {
+    public AccountType getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(String accountType) {
+    public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
 
