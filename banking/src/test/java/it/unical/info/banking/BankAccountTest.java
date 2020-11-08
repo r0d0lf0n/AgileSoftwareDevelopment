@@ -80,19 +80,31 @@ public class BankAccountTest {
     }
 
     @Test
-    public void findAllEnterprise() {
-
+    public void findAllNormal(){
         List<BankAccount> l_bormal = bankAccountRepo.findAll(isNormal());
         Assert.assertEquals(4, l_bormal.size());
+    }
 
+    @Test
+    public void findAllEnterprise() {
         List<BankAccount> l_enterprise = bankAccountRepo.findAll(isEnterprise());
         Assert.assertEquals(9, l_enterprise.size());
+    }
 
+    @Test
+    public void findAllShared(){
         List<BankAccount> l_shared = bankAccountRepo.findAll(isShared());
         Assert.assertEquals(4, l_shared.size());
+    }
 
+    private void insertBankAccount(Long accountNumber, AccountType type) {
+        BankAccount account = new BankAccount();
+        account.setAccountNumber(accountNumber);
+        account.setAccountType(type);
+        bankAccountRepo.save(account);
+    }
 
-//        l_enterprise.stream().forEach(
+    //        l_enterprise.stream().forEach(
 //                System.out::println
 //        );
 //
@@ -103,15 +115,6 @@ public class BankAccountTest {
 //        l_shared.stream().forEach(
 //                System.out::println
 //        );
-
-    }
-
-    private void insertBankAccount(Long accountNumber, AccountType type) {
-        BankAccount account = new BankAccount();
-        account.setAccountNumber(accountNumber);
-        account.setAccountType(type);
-        bankAccountRepo.save(account);
-    }
 
 }
 
