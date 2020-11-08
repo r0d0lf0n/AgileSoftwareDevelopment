@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface MovementRepository extends JpaRepository<Movement, Long>, JpaSpecificationExecutor<Movement> {
 
-    List<Movement> findAllBy(Long id);
+//    List<Movement> findAllBy(Long id);
 }

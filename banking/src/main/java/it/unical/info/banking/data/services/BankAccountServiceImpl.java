@@ -17,7 +17,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     @Override
     public List<BankAccount> getAll() {
 
-        List<BankAccount> l = bankAccountRepo.findAll();
+        List<BankAccount> l = (List<BankAccount>) bankAccountRepo.findAll();
 
         return l;
     }
