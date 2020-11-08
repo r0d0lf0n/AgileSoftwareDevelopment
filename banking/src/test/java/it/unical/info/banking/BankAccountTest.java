@@ -1,7 +1,6 @@
 package it.unical.info.banking;
 
 import it.unical.info.banking.data.dao.BankAccountRepository;
-import it.unical.info.banking.data.dao.BankAccountRepository;
 import it.unical.info.banking.data.entities.BankAccount;
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,18 +11,21 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
+import static it.unical.info.banking.Specifications.BankAccountSpecification.isEnterprise;
+
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BankAccountTest {
 
     @Autowired
-    BankAccountRepository bankAccountDao;
+    BankAccountRepository bankAccountRepo;
 
     @Test
-    public void findAll() {
-        List<BankAccount> l = bankAccountDao.findAll();
+    public void findAllEnterprise() {
+        List<BankAccount> l = bankAccountRepo.findAll(isEnterprise());
 
-        Assert.assertEquals(0, l.size());
+        Assert.assertEquals(2, l.size());
     }
 
 }
