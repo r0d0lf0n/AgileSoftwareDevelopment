@@ -1,6 +1,7 @@
 package it.unical.info.banking.helpers;
 
 import it.unical.info.banking.data.entities.BankAccount;
+import it.unical.info.banking.data.entities.BankAccount_;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,12 +10,11 @@ import java.util.function.Predicate;
 
 public class BankAccountSpecification {
 
-    public static Specification<BankAccount> bankTypeEnterprise(String type) {
+    public static Specification<BankAccount> bankTypeEnterprise(String accountType) {
         return new Specification<BankAccount>() {
             @Override
             public Predicate toPredicate(Root<BankAccount> root, CriteriaQuery query, CriteriaBuilder cb) {
-//                return cb.equal(root.get(BankAccount_.accountType), type);
-                return null;
+                return (Predicate) cb.equal(root.get(BankAccount_.accountType), accountType);
             }
         };
     }
@@ -27,3 +27,4 @@ public class BankAccountSpecification {
 //        } ;
 //    }
 }
+
