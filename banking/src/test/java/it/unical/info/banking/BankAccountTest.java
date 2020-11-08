@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static it.unical.info.banking.Specifications.BankAccountSpecification.isEnterprise;
+import static it.unical.info.banking.Specifications.BankAccountSpecification.*;
 
 
 @RunWith(SpringRunner.class)
@@ -23,12 +23,21 @@ public class BankAccountTest {
 
     @Test
     public void findAllEnterprise() {
-        List<BankAccount> l = bankAccountRepo.findAll(isEnterprise());
+        List<BankAccount> l_enterprise = bankAccountRepo.findAll(isEnterprise());
+        List<BankAccount> l_bormal = bankAccountRepo.findAll(isNormal());
+        List<BankAccount> l_shared = bankAccountRepo.findAll(isShared());
 
-        l.forEach(
+        l_enterprise.stream().forEach(
                 System.out::println
         );
 
+        l_bormal.stream().forEach(
+                System.out::println
+        );
+
+        l_shared.stream().forEach(
+                System.out::println
+        );
 
 //        Assert.assertEquals(1, l.size());
     }
