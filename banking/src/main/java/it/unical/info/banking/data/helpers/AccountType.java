@@ -13,9 +13,9 @@ public enum AccountType {
 
     private int value;
 
-    AccountType() {
-        value = 1 + ordinal();
-    }
+//    AccountType() {
+//        value = 1 + ordinal();
+//    }
 
     /**
      * Returns the value of a particular type
@@ -23,5 +23,9 @@ public enum AccountType {
      */
     public int getValue() {
         return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 }
