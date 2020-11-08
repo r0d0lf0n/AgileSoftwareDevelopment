@@ -30,9 +30,33 @@ public class BankAccount {
             cascade = CascadeType.REMOVE)
     private List<AccountBalance> movement;
 
+    public List<AccountBalance> getBalance() {
+        return balance;
+    }
+
+    public void setBalance(List<AccountBalance> balance) {
+        this.balance = balance;
+    }
+
+    public List<AccountBalance> getMovement() {
+        return movement;
+    }
+
+    public void setMovement(List<AccountBalance> movement) {
+        this.movement = movement;
+    }
+
+    public void setAccountNumber(Long accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
     @Basic(optional = false)
     @Column(name = "accountType")
     private AccountType accountType;
+
+    @Basic(optional = false)
+    @Column(name = "accountNumber")
+    private Long accountNumber;
 
     public Long getId() {
         return id;
