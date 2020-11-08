@@ -6,6 +6,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 
-public interface Specification<T> {
+public interface SpecificationCustom<T> {
     Predicate toPredicate(Root<T> root, CriteriaQuery query, CriteriaBuilder cb);
 }
