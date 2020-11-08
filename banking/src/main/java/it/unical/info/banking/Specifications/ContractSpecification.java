@@ -1,10 +1,7 @@
 package it.unical.info.banking.Specifications;
 
-import it.unical.info.banking.data.entities.BankAccount;
-import it.unical.info.banking.data.entities.BankAccount_;
 import it.unical.info.banking.data.entities.Contract;
 import it.unical.info.banking.data.entities.Contract_;
-import it.unical.info.banking.data.helpers.AccountType;
 import org.springframework.data.jpa.domain.Specification;
 
 public class ContractSpecification {
