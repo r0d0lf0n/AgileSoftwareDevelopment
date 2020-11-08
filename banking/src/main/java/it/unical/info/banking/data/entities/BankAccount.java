@@ -20,13 +20,13 @@ public class BankAccount {
 
     @Column(name = "accountNumber", nullable = false)
     @OneToMany(mappedBy = "accountNumber",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.REMOVE)
     private List<AccountBalance> balance;
 
     @Column(name = "movement", nullable = false)
     @OneToMany(mappedBy = "accountNumber",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.REMOVE)
     private List<AccountBalance> movement;
 
