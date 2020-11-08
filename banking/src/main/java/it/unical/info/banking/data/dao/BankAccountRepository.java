@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface BankAccountRepository extends CrudRepository<BankAccount, Long>, JpaSpecificationExecutor<BankAccount> {
 
-    List<BankAccount> findAll(Specification spec);
+    List<BankAccount> findEnterpriseAccounts(Specification spec);
 
 }
