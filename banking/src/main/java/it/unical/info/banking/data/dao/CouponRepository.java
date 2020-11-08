@@ -9,9 +9,16 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CouponRepository extends CrudRepository<Coupon, Long>, JpaSpecificationExecutor<Coupon> {
 
-    List<Contract> findAllById(Long id);
+    List<Coupon> findAll();
+
+    Optional<Coupon> findById(Long id);
+
+    Optional<Coupon> findByCouponSequentialNumber(Long seqNumber);
+
+    Optional<Coupon> findByAmount(Long amount);
 }
