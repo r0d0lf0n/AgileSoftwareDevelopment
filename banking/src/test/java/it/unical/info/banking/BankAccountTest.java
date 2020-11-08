@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -41,7 +42,7 @@ public class BankAccountTest {
 
         bankAccountRepo.deleteAll();
 
-        if (true) {
+        if (!isInitialized) {
             CSVParser bankAccountCsv = CSVFormat.DEFAULT.withDelimiter(',')
                     .parse(new InputStreamReader(bankAccountRes.getInputStream()));
             for (CSVRecord record : bankAccountCsv) {
@@ -70,6 +71,15 @@ public class BankAccountTest {
     }
 
     @Test
+    public void findAllNormalOrEnterprise() {
+        List<BankAccount> l_combined = bankAccountRepo.findAll(
+                Specification.where(isNormal())
+                        .or(isEnterprise())
+        );
+        Assert.assertEquals(13, l_combined.size());
+    }
+
+    @Test
     public void findAllEnterprise() {
 
         List<BankAccount> l_bormal = bankAccountRepo.findAll(isNormal());
@@ -81,7 +91,6 @@ public class BankAccountTest {
         List<BankAccount> l_shared = bankAccountRepo.findAll(isShared());
         Assert.assertEquals(4, l_shared.size());
 
-        
 
 //        l_enterprise.stream().forEach(
 //                System.out::println
